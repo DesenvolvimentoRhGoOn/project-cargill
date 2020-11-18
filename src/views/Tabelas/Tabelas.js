@@ -1,11 +1,9 @@
 import React from "react";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
-import InputLabel from "@material-ui/core/InputLabel";
 // core components
 import GridItem from "components/Grid/GridItem.js";
 import GridContainer from "components/Grid/GridContainer.js";
-import CustomInput from "components/CustomInput/CustomInput.js";
 import Button from "components/CustomButtons/Button.js";
 import Card from "components/Card/Card.js";
 import CardHeader from "components/Card/CardHeader.js";
@@ -216,19 +214,7 @@ export default function UserProfile() {
             <h4 className={classes.cardTitleWhite}>Tabelas</h4>
           </CardHeader>
           <CardBody>
-           <GridContainer>
-           <GridItem xs={12} sm={12} md={3}>
-                    <TextField 
-                      name="nomeTabela"
-                      label="Tabela"
-                    >
-                    </TextField>
-                  </GridItem>
-                  <GridItem xs={12} sm={12} md={4}>
-                  <Button color="primary">Pesquisar</Button>
-                  </GridItem>
-           
-             </GridContainer> 
+
             <Table
               tableHeaderColor="primary"
               tableHead={["Tabela", "Modulo", "Processo"]}

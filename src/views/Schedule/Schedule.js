@@ -10,6 +10,8 @@ import CardHeader from "components/Card/CardHeader.js";
 import CardBody from "components/Card/CardBody.js";
 import { TextField } from "@material-ui/core";
 import MenuItem from '@material-ui/core/MenuItem';
+import Button from "components/CustomButtons/Button.js";
+import CardFooter from "components/Card/CardFooter.js";
 
 const styles = {
   cardCategoryWhite: {
@@ -41,30 +43,83 @@ const styles = {
   }
 };
 
-const modulos = [
-    {
-      value: 'modulo1',
-      label: '08:00 AM',
-    },
-    {
-      value: 'modulo2',
-      label: '09:00 AM',
-    },
-    {
-      value: 'modulo3',
-      label: '10:00 AM',
-    }
-  ];
+const horarios = [
+  {
+    value: 'horario1',
+    label: '08:00 AM',
+  },
+  {
+    value: 'horario2',
+    label: '09:00 AM',
+  },
+  {
+    value: 'horario3',
+    label: '10:00 AM',
+  },
+  {
+    value: 'horario4',
+    label: '11:00 AM',
+  },
+  {
+    value: 'horario5',
+    label: '12:00 PM',
+  },
+  {
+    value: 'horario6',
+    label: '14:00 PM',
+  },
+  {
+    value: 'horario7',
+    label: '16:00 PM',
+  },
+];
 
-  
+const waves = [
+  {
+    value: 'wave1',
+    label: 'Wave 1',
+  },
+  {
+    value: 'wave2',
+    label: 'Wave 2',
+  },
+  {
+    value: 'wave3',
+    label: 'Wave 3',
+  },
+  {
+    value: 'wave4',
+    label: 'Wave 4',
+  },
+  {
+    value: 'wave5',
+    label: 'Wave 5',
+  },
+  {
+    value: 'wave6',
+    label: 'Wave 6',
+  },
+  {
+    value: 'wave7',
+    label: 'Wave 7',
+  }
+
+];
+
+
 const useStyles = makeStyles(styles);
 
 export default function TableList() {
   const classes = useStyles();
-  const [modulo, setModulo] = React.useState('modulo1');
-  
-  const handleModuleChange = (event) => {
-    setModulo(event.target.value);
+  const [wave, setWave] = React.useState('wave1');
+  const [horario, setHorario] = React.useState('horario1');
+
+  const handleWaveChange = (event) => {
+    setWave(event.target.value);
+  };
+
+  const handleHorarioChange = (event) => {
+    setHorario(event.target.value);
   };
 
   return (
@@ -76,42 +131,85 @@ export default function TableList() {
           </CardHeader>
           <CardBody>
             <GridContainer>
-            <GridItem xs={6} sm={12} md={8}>
+              <GridItem xs={6} sm={12} md={8}>
                 <TextField className={classes.inputModulo}
-                select
-                label="Wave"
-                value={modulo}
-                onChange={handleModuleChange}
+                  select
+                  label="Wave"
+                  value={wave}
+                  onChange={handleWaveChange}
                 >
-                {modulos.map((option) => (
-                <MenuItem 
-                key={option.value} 
-                value={option.value}>
-                {option.label}
-                </MenuItem>
-                ))}
+                  {waves.map((option) => (
+                    <MenuItem
+                      key={option.value}
+                      value={option.value}>
+                      {option.label}
+                    </MenuItem>
+                  ))}
                 </TextField>
-            </GridItem>
-            <GridItem xs={6} sm={12} md={2}>
+              </GridItem>
+              <GridItem xs={6} sm={12} md={2}>
                 <TextField className={classes.inputModulo}
-                select
-                label="Horario"
-                value={modulo}
-                onChange={handleModuleChange}
+                  select
+                  label="Horario"
+                  value={horario}
+                  onChange={handleHorarioChange}
                 >
-                {modulos.map((option) => (
-                <MenuItem 
-                key={option.value} 
-                value={option.value}>
-                {option.label}
-                </MenuItem>
-                ))}
+                  {horarios.map((option) => (
+                    <MenuItem
+                      key={option.value}
+                      value={option.value}>
+                      {option.label}
+                    </MenuItem>
+                  ))}
                 </TextField>
-            </GridItem>
+              </GridItem>
             </GridContainer>
+            <CardFooter>
+              <Button color="primary">Salvar</Button>
+              <Button color="primary">Fechar</Button>
+            </CardFooter>
+          </CardBody>
+        </Card>
+      </GridItem>
+      <GridItem xs={12} sm={12} md={12}>
+        <Card>
+          <CardHeader color="primary">
+            <h4 className={classes.cardTitleWhite}>Tabelas</h4>
+          </CardHeader>
+          <CardBody>
+           <GridContainer>
+           <GridItem xs={12} sm={12} md={3}>
+                    <TextField 
+                      name="nomeTabela"
+                      label="Tabela"
+                    >
+                    </TextField>
+                  </GridItem>
+                  <GridItem xs={12} sm={12} md={4}>
+                  <Button color="primary">Pesquisar</Button>
+                  </GridItem>
+                 
+           
+             </GridContainer> 
+            <Table
+              tableHeaderColor="primary"
+              tableHead={["Wave", "Horário", "Situação"]}
+              tableData={[
+                ["Wave 13", "08:00 AM",  "Finalizado"],
+                ["Wave 22", "09:00 AM",  "Finalizado"],
+                ["Wave 36", "12:00 PM",  "Finalizado"],
+                ["Wave 43", "14:00 PM",  "Novo"],
+                ["Wave 57", "15:00 PM",  "Novo"],
+                ["Wave 62", "16:00 PM",  "Novo"],
+
+              ]}
+            />
           </CardBody>
         </Card>
       </GridItem>
     </GridContainer>
-  ); 
+    
+    
+    
+  );
 }
