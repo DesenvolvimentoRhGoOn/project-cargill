@@ -53,7 +53,7 @@ export default function TableList() {
           <CardBody>
             <Table
               tableHeaderColor="primary"
-              tableHead={["Quem", "Quando", "Oque"]}
+              tableHead={["Quem", "Quando", "Ação Realizada"]}
               tableData={[
                 ["Cleber", "12/11/2020", "Cadastro Wave"],
                 ["Diego", "09/11/2020", "Exclusao Wave"],

@@ -88,38 +88,27 @@ const styles = {
   }
 };
 
-const waves = [
-  {
-    value: 'Wave1',
-    label: 'Wave11235',
-  },
-  {
-    value: 'Wave2',
-    label: 'Wave2',
-  },
-  {
-    value: 'Wave3',
-    label: 'Wave3',
-  },
-  {
-    value: 'Wave4',
-    label: 'Wave4',
-  },
-];
-
 const modulos = [
   {
     value: 'modulo1',
-    label: 'Criação de Pedido',
+    label: 'Originação',
   },
   {
     value: 'modulo2',
-    label: 'Criação de Load',
+    label: 'Sales',
   },
   {
     value: 'modulo3',
-    label: 'Vendas',
-  }
+    label: 'Transportation',
+  },
+  { 
+  value: 'modulo3',
+  label: 'Procurement',
+},
+{
+  value: 'modulo3',
+  label: 'Modelo Contábil',
+}
 ];
 
 export default function UserProfile() {
@@ -180,13 +169,11 @@ export default function UserProfile() {
               tableHeaderColor="primary"
               tableHead={["Modulo", "Data Registro", "Usuario"]}
               tableData={[
-                ["Modulo1", "17/10/2020", "c123554"],
-                ["Modulo2", "14/11/2020", "c575567"],
-                ["Modulo3", "17/07/2020", "c145356"],
-                ["Modulo4", "11/11/2020", "c157675"],
-                ["Modulo5", "13/05/2020", "c156546"],
-                ["Modulo6", "12/11/2020", "c357677"],
-
+                ["Originação", "17/10/2020", "c123554"],
+                ["Sales", "14/11/2020", "c575567"],
+                ["Transportation", "17/07/2020", "c145356"],
+                ["Procurement", "11/11/2020", "c157675"],
+                ["Modelo contábil", "13/05/2020", "c156546"],
               ]}
             />
           </CardBody>

@@ -12,6 +12,12 @@ import { TextField } from "@material-ui/core";
 import MenuItem from '@material-ui/core/MenuItem';
 import Button from "components/CustomButtons/Button.js";
 import CardFooter from "components/Card/CardFooter.js";
+import DateFnsUtils from '@date-io/date-fns';
+import {
+  MuiPickersUtilsProvider,
+  KeyboardTimePicker,
+  KeyboardDatePicker,
+} from '@material-ui/pickers';
 
 const styles = {
   cardCategoryWhite: {
@@ -25,6 +31,9 @@ const styles = {
     "& a,& a:hover,& a:focus": {
       color: "#FFFFFF"
     }
+  },
+  inputHora:{
+    marginTop: 15
   },
   cardTitleWhite: {
     color: "#FFFFFF",
@@ -106,6 +115,20 @@ const waves = [
 
 ];
 
+const modulos = [
+  {
+    value: 'modulo1',
+    label: 'Criação de Pedido',
+  },
+  {
+    value: 'modulo2',
+    label: 'Criação de Load',
+  },
+  {
+    value: 'modulo3',
+    label: 'Vendas',
+  }
+];
 
 const useStyles = makeStyles(styles);
 
@@ -113,6 +136,18 @@ export default function TableList() {
   const classes = useStyles();
   const [wave, setWave] = React.useState('wave1');
   const [horario, setHorario] = React.useState('horario1');
+
+  
+  const handleDateChange = (date) => {
+    setSelectedDate(date);
+  };
+
+  const [selectedDate, setSelectedDate] = React.useState(new Date('2020-11-16T21:11:54'));
+  
+  const [modulo, setModulo] = React.useState('modulo1');
+  const handleModuleChange = (event) => {
+    setModulo(event.target.value);
+  };
 
   const handleWaveChange = (event) => {
     setWave(event.target.value);
@@ -131,7 +166,7 @@ export default function TableList() {
           </CardHeader>
           <CardBody>
             <GridContainer>
-              <GridItem xs={6} sm={12} md={8}>
+              <GridItem xs={6} sm={12} md={4}>
                 <TextField className={classes.inputModulo}
                   select
                   label="Wave"
@@ -147,8 +182,55 @@ export default function TableList() {
                   ))}
                 </TextField>
               </GridItem>
-              <GridItem xs={6} sm={12} md={2}>
-                <TextField className={classes.inputModulo}
+              <GridItem xs={12} sm={12} md={4}>
+                    <TextField className={classes.inputModulo}
+                    select
+                    label="Modulo"
+                    value={modulo}
+                    onChange={handleModuleChange}
+                    >
+                    {modulos.map((option) => (
+                    <MenuItem 
+                    key={option.value} 
+                    value={option.value}>
+                    {option.label}
+                    </MenuItem>
+                    ))}
+                    </TextField>
+                  </GridItem>
+                  <GridItem xs={12} sm={12} md={4}>
+                <TextField  className={classes.inputSituação}
+                defaultValue="00:30"
+                id="standard-basic"
+                disabled
+                label="Previsão Conclusão" 
+                color="primary"                                         
+                >
+                </TextField >
+              </GridItem> 
+            </GridContainer>
+            <GridContainer>
+            <GridItem xs={12} sm={12} md={4}>
+                        <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                            <KeyboardDatePicker
+                            className={classes.dateInput}
+                            color="primary"
+                            disableToolbar
+                            variant="inline"
+                            format="MM/dd/yyyy"
+                            margin="normal"
+                            id="date-picker-inline"
+                            label="Data Execução"
+                            value={selectedDate}
+                            onChange={handleDateChange}
+                            KeyboardButtonProps={{
+                                'aria-label': 'change date',
+                            }}
+                            />
+                        </MuiPickersUtilsProvider>
+                    </GridItem>
+                    <GridItem xs={6} sm={12} md={4}>
+                <TextField className={classes.inputHora}
                   select
                   label="Horario"
                   value={horario}
@@ -171,45 +253,6 @@ export default function TableList() {
           </CardBody>
         </Card>
       </GridItem>
-      <GridItem xs={12} sm={12} md={12}>
-        <Card>
-          <CardHeader color="primary">
-            <h4 className={classes.cardTitleWhite}>Tabelas</h4>
-          </CardHeader>
-          <CardBody>
-           <GridContainer>
-           <GridItem xs={12} sm={12} md={3}>
-                    <TextField 
-                      name="nomeTabela"
-                      label="Tabela"
-                    >
-                    </TextField>
-                  </GridItem>
-                  <GridItem xs={12} sm={12} md={4}>
-                  <Button color="primary">Pesquisar</Button>
-                  </GridItem>
-                 
-           
-             </GridContainer> 
-            <Table
-              tableHeaderColor="primary"
-              tableHead={["Wave", "Horário", "Situação"]}
-              tableData={[
-                ["Wave 13", "08:00 AM",  "Finalizado"],
-                ["Wave 22", "09:00 AM",  "Finalizado"],
-                ["Wave 36", "12:00 PM",  "Finalizado"],
-                ["Wave 43", "14:00 PM",  "Novo"],
-                ["Wave 57", "15:00 PM",  "Novo"],
-                ["Wave 62", "16:00 PM",  "Novo"],
-
-              ]}
-            />
-          </CardBody>
-        </Card>
-      </GridItem>
-    </GridContainer>
-    
-    
-    
+    </GridContainer>  
   );
 }

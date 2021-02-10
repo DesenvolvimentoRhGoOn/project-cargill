@@ -13,47 +13,25 @@ import Schedule from "views/Schedule/Schedule.js"
 const dashboardRoutes = [
   {
     path: "/uploadArchive",
-    name: "Purge & Archive",
+    name: "Status Purge & Archive",
     icon: "content_paste",
     component: PurgeArchive,
     layout: "/admin"
   },    
   {
     path: "/waves",
-    name: "Waves",
+    name: "Cadastro de Wave",
     icon: "content_paste",
     component: Waves,
     layout: "/admin"
   },
   {
-    path: "/tabelas",
-    name: "Tabelas",
-    icon: "content_paste",
-    component: Tabelas,
-    layout: "/admin"
-  },
-  {
     path: "/modulos",
-    name: "Modulos",
+    name: "Cadastro de Módulo",
     icon: "content_paste",
     component: Modulos,
     layout: "/admin"
   },
-  {
-    path: "/processos",
-    name: "Processos",
-    icon: "content_paste",
-    component: Processos,
-    layout: "/admin"
-  },
-  {
-    path: "/status",
-    name: "Status Archive",
-    icon: "description",
-    component: StatusArchive,
-    layout: "/admin"
-  },
-  
   {
     path: "/schedule",
     name: "Schedule",
@@ -68,29 +46,6 @@ const dashboardRoutes = [
     component: Auditorias,
     layout: "/admin"
   },
-
-  /*
-  {
-    path: "/typography",
-    name: "Typography",
-    icon: LibraryBooks,
-    component: Typography,
-    layout: "/admin"
-  },
-  {
-    path: "/icons",
-    name: "Icons",
-    icon: BubbleChart,
-    component: Icons,
-    layout: "/admin"
-  },
-  {
-    path: "/notifications",
-    name: "Notifications",
-    icon: Notifications,
-    component: NotificationsPage,
-    layout: "/admin"
-  }*/
 ];
 
 export default dashboardRoutes;

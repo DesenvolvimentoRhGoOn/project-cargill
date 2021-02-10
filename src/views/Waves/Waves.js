@@ -1,24 +1,23 @@
 import React from "react";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
-import InputLabel from "@material-ui/core/InputLabel";
 // core components
 import GridItem from "components/Grid/GridItem.js";
 import GridContainer from "components/Grid/GridContainer.js";
 import Button from "components/CustomButtons/Button.js";
 import Card from "components/Card/Card.js";
 import CardHeader from "components/Card/CardHeader.js";
-import CardAvatar from "components/Card/CardAvatar.js";
+import FormGroup from '@material-ui/core/FormGroup';
 import CardBody from "components/Card/CardBody.js";
 import CardFooter from "components/Card/CardFooter.js";
-import DateFnsUtils from '@date-io/date-fns';
 import MenuItem from '@material-ui/core/MenuItem';
-import { DataGrid } from '@material-ui/data-grid';
+import Checkbox from '@material-ui/core/Checkbox';
 import PropTypes from 'prop-types';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Typography from '@material-ui/core/Typography';
 import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 import TableBody from '@material-ui/core/TableBody';
 import Box from '@material-ui/core/Box';
@@ -85,6 +84,7 @@ const styles = {
       
     },
   },
+
   inputModulo: {
     position: "absolute",
     top: "127px",
@@ -100,29 +100,6 @@ const styles = {
     }, 
   }
 };
-
-const rowsTabela = [
-  { id: 1, nome:'F12354' },
-  { id: 2, nome:'F53476' },
-  { id: 3, nome:'F15465' },
-  { id: 4, nome:'F12545' },
-  { id: 5, nome:'F14654' },
-  { id: 6, nome:'F53476' },
-  { id: 7, nome:'F15465' },
-  { id: 8, nome:'F12545' },
-  { id: 9, nome:'F14654' },
-  { id: 10, nome:'F53476' },
-  { id: 11, nome:'F15465' },
-  { id: 12, nome:'F12545' },
-  { id: 13, nome:'F14654' },
-  
-];
-
-const columns = [
-  
-  { field: 'nome', headerName: 'Tabela', width: 100 } 
-];
-
 
 function createData(name) {
   return {
@@ -152,6 +129,15 @@ export default function Waves() {
         }
       }
     },
+    inputArquivo:{
+      
+    },
+  inputFileButtom: {
+    top: "15px"
+  },
+  checkBox :{
+    top: "15px"
+  },
     cardCategoryWhite: {
       color: "rgba(255,255,255,.62)",
       margin: "0",
@@ -168,6 +154,9 @@ export default function Waves() {
       marginBottom: "3px",
       textDecoration: "none"
     },
+    inputNomeTabela:{
+      marginBottom:"10px"
+    },
     dataGridFooter:{
       '& .MuiDataGrid-footer':{
         display: 'flex',
@@ -181,17 +170,31 @@ export default function Waves() {
         }
       }
     }
-    /*
-    ,
-    cardWaves:{
-      width:"50%",
-      marginLeft: 200
-    }
-    */
   }
+
+  const modulos = [
+    {
+      value: 'modulo1',
+      label: 'Criação de Pedido',
+    },
+    {
+      value: 'modulo2',
+      label: 'Criação de Load',
+    },
+    {
+      value: 'modulo3',
+      label: 'Vendas',
+    }
+  ];
   
   const useStyles = makeStyles(styles);
   const classes = useStyles();
+
+  const [modulo, setModulo] = React.useState('modulo1');
+  const handleModuleChange = (event) => {
+    setModulo(event.target.value);
+  };
+
 
   return (
     
@@ -205,25 +208,71 @@ export default function Waves() {
             <CardBody>
                 <GridContainer>
                   <GridItem xs={12} sm={12} md={4}>
-                  <TextField 
-                    name="NomeWave"
-                    label="Wave"
+                  <TextField className={classes.inputNomeTabela} 
+                    name="nomeTabela"
+                    label="Tabela"
                   >
                   </TextField>
                   </GridItem>
-                  <GridItem xs={12} sm={12} md={6}>
-                    <div style={{ height: 350, width: '101%' }}>
-                    <DataGrid className={classes.dataGridFooter}
-                    rows={rowsTabela}
-                    columns={columns}
-                    pageSize={5}
-                    checkboxSelection>
-                    </DataGrid>
-                    </div>
-                    
+                  <GridItem xs={12} sm={12} md={4}>
+                  <TextField  
+                    name="tempoExecucao"
+                    label="Tempo Execução"
+                  >
+                  </TextField>
                   </GridItem>
+                  <GridItem xs={12} sm={12} md={4}>
+                    <FormGroup row>
+                    <FormControlLabel 
+                     control={<Checkbox  color = "black" name="checkedC" />}  label="Executa em horario comercial?" />
+                    </FormGroup>
+                    </GridItem>
+                  </GridContainer>
+                  <GridContainer>
+                  <GridItem xs={12} sm={12} md={4}>
+                    <TextField className={classes.inputModulo}
+                    select
+                    label="Modulo"
+                    value={modulo}
+                    onChange={handleModuleChange}
+                    >
+                    {modulos.map((option) => (
+                    <MenuItem 
+                    key={option.value} 
+                    value={option.value}>
+                    {option.label}
+                    </MenuItem>
+                    ))}
+                    </TextField>
+                  </GridItem>
+                    
+                    <GridItem xs={12} sm={12} md={2}>
+                        <TextField className={classes.inputArquivo}
+                        disabled
+                        defaultValue="16112020.sql"
+                        label="Arquivo"
+                        id="arquivoId"
+                        formControlProps={{
+                        fullWidth: true
+                        }}>
+                        </TextField>
+                    </GridItem>
+                     <GridItem xs={12} sm={12} md={3}>
+                        <Button className={classes.inputFileButtom} color="primary"
+                        variant="contained"
+                        component="label"
+                        >
+                        Upload
+                        <input
+                        type="file"
+                        hidden
+                        />
+                        </Button>
+                    </GridItem>
                   
                   </GridContainer>
+                  
+          
             </CardBody>
             <CardFooter>
               <Button color="primary">Salvar</Button>
@@ -232,27 +281,7 @@ export default function Waves() {
           </Card>
         </GridItem>
       </GridContainer>
-      <Card className={classes.cardWaves}>
-        <CardHeader color="primary">
-          <h4 className={classes.cardTitleWhite}>Waves</h4>
-        </CardHeader >
-        <TableContainer component={Paper}>
-        
-        <Table aria-label="collapsible table">
-        
-          <TableBody>
-            {rows.map((row) => (
-              <Row key={row.name} row={row} />
-            ))}
-          </TableBody>
-          
-        </Table>
-        
-      </TableContainer>
-      </Card> 
-
    </div> 
-    
   );
 }
 
@@ -265,7 +294,6 @@ export default function Waves() {
   const { row } = props;
   const [open, setOpen] = React.useState(false);
   
-
 
   return (
     <div>
